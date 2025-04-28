@@ -52,7 +52,7 @@ parameters:
     llm_description: The password for connecting to the database
     form: llm
   - name: db_port
-    type: string
+    type: number
     required: true
     label:
       en_US: Port
