@@ -7,23 +7,143 @@ identity:
     pt_BR: dify_db_tools
 description:
   human:
-    en_US: A database tool that follows the dify plugin specification
-    zh_Hans: A database tool that follows the dify plugin specification
-    pt_BR: A database tool that follows the dify plugin specification
-  llm: A database tool that follows the dify plugin specification
+    en_US: A dify tool for adding, deleting, modifying and querying based on the mariadb database
+    zh_Hans: 一个基于mariadb数据库进行增删改查的dify工具
+    pt_BR: A dify tool for adding, deleting, modifying and querying based on the mariadb database
+  llm: A dify tool for adding, deleting, modifying and querying based on the mariadb database
 parameters:
-  - name: query
+  - name: db_host
     type: string
     required: true
     label:
-      en_US: Query string
-      zh_Hans: 查询语句
-      pt_BR: Query string
+      en_US: Host
+      zh_Hans: 主机地址
+      pt_BR: Host
     human_description:
-      en_US: A database tool that follows the dify plugin specification
-      zh_Hans: A database tool that follows the dify plugin specification
-      pt_BR: A database tool that follows the dify plugin specification
-    llm_description: A database tool that follows the dify plugin specification
+      en_US: The host address for connecting to the database
+      zh_Hans: 连接数据库的主机地址
+      pt_BR: The host address for connecting to the database
+    llm_description: The host address for connecting to the database
+    form: llm
+  - name: db_user
+    type: string
+    required: true
+    label:
+      en_US: User
+      zh_Hans: 用户名
+      pt_BR: User
+    human_description:
+      en_US: The user for connecting to the database
+      zh_Hans: 连接数据库的用户名
+      pt_BR: The user for connecting to the database
+    llm_description: The user for connecting to the database
+    form: llm
+  - name: db_password
+    type: secret-input
+    required: true
+    label:
+      en_US: Password
+      zh_Hans: 密码
+      pt_BR: Password
+    human_description:
+      en_US: The password for connecting to the database
+      zh_Hans: 连接数据库的密码
+      pt_BR: The password for connecting to the database
+    llm_description: The password for connecting to the database
+    form: llm
+  - name: db_port
+    type: string
+    required: true
+    label:
+      en_US: Port
+      zh_Hans: 端口
+      pt_BR: Port
+    human_description:
+      en_US: The port for connecting to the database
+      zh_Hans: 连接数据库的端口
+      pt_BR: The port for connecting to the database
+    llm_description: The port for connecting to the database
+    form: llm
+  - name: db_database
+    type: string
+    required: true
+    label:
+      en_US: Database
+      zh_Hans: 数据库名
+      pt_BR: Database
+    human_description:
+      en_US: The database for connecting to the database
+      zh_Hans: 连接数据库的数据库名称
+      pt_BR: The database for connecting to the database
+    llm_description: The database for connecting to the database
+    form: llm
+  - name: operateType
+    type: select
+    required: true
+    label:
+      en_US: Operate Type
+      zh_Hans: 操作类型
+      pt_BR: Operate Type
+    human_description:
+      en_US: The operation type of the database
+      zh_Hans: 操作数据库的类型
+      pt_BR: The operation type of the database
+    llm_description: The operation type of the database
+    form: llm
+    options:
+      - label:
+          en_US: query
+          zh_Hans: 查询
+        value: query
+      - label:
+          en_US: item
+          zh_Hans: 查询单条
+        value: item
+      - label:
+          en_US: insert
+          zh_Hans: 新建
+        value: insert
+      - label:
+          en_US: update
+          zh_Hans: 更新
+        value: update
+      - label:
+          en_US: delete
+          zh_Hans: 删除
+        value: delete
+      - label:
+          en_US: batchInsert
+          zh_Hans: 批量新建
+        value: batchInsert
+      - label:
+          en_US: batchUpdate
+          zh_Hans: 批量更新
+        value: batchUpdate
+  - name: operateData
+    type: string
+    required: true
+    label:
+      en_US: Operate Data
+      zh_Hans: 操作参数
+      pt_BR: Operate Data
+    human_description:
+      en_US: The operation data
+      zh_Hans: 操作参数(json字符串)
+      pt_BR: The operation data
+    llm_description: The operation data
+    form: llm
+  - name: moduleConfig
+    type: string
+    required: true
+    label:
+      en_US: Module Config
+      zh_Hans: 模块配置信息对象
+      pt_BR: Module Config
+    human_description:
+      en_US: Module Config
+      zh_Hans: 模块配置信息对象
+      pt_BR: Module Config
+    llm_description: Module Config
     form: llm
 extra:
   python:
