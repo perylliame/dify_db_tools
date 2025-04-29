@@ -44,7 +44,7 @@ ConvertTypes = {
 def create_convertor(config):
     convert_columns = [(col_name, col_config) for col_name, col_config in config["columns"].items() if col_config.get("convert")]
 
-    print('convert_columns ==>>', convert_columns)
+    # print('convert_columns ==>>', convert_columns)
 
     def encode_list(list_):
         if not len(convert_columns):
