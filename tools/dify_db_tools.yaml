@@ -12,70 +12,18 @@ description:
     pt_BR: A dify tool for adding, deleting, modifying and querying based on the mariadb database
   llm: A dify tool for adding, deleting, modifying and querying based on the mariadb database
 parameters:
-  - name: db_host
+  - name: db_info
     type: string
     required: true
     label:
-      en_US: Host
-      zh_Hans: 主机地址
-      pt_BR: Host
+      en_US: Database connect info
+      zh_Hans: 连接数据库的信息
+      pt_BR: Database connect info
     human_description:
-      en_US: The host address for connecting to the database
-      zh_Hans: 连接数据库的主机地址
-      pt_BR: The host address for connecting to the database
-    llm_description: The host address for connecting to the database
-    form: llm
-  - name: db_user
-    type: string
-    required: true
-    label:
-      en_US: User
-      zh_Hans: 用户名
-      pt_BR: User
-    human_description:
-      en_US: The user for connecting to the database
-      zh_Hans: 连接数据库的用户名
-      pt_BR: The user for connecting to the database
-    llm_description: The user for connecting to the database
-    form: llm
-  - name: db_password
-    type: secret-input
-    required: true
-    label:
-      en_US: Password
-      zh_Hans: 密码
-      pt_BR: Password
-    human_description:
-      en_US: The password for connecting to the database
-      zh_Hans: 连接数据库的密码
-      pt_BR: The password for connecting to the database
-    llm_description: The password for connecting to the database
-    form: llm
-  - name: db_port
-    type: number
-    required: true
-    label:
-      en_US: Port
-      zh_Hans: 端口
-      pt_BR: Port
-    human_description:
-      en_US: The port for connecting to the database
-      zh_Hans: 连接数据库的端口
-      pt_BR: The port for connecting to the database
-    llm_description: The port for connecting to the database
-    form: llm
-  - name: db_database
-    type: string
-    required: true
-    label:
-      en_US: Database
-      zh_Hans: 数据库名
-      pt_BR: Database
-    human_description:
-      en_US: The database for connecting to the database
-      zh_Hans: 连接数据库的数据库名称
-      pt_BR: The database for connecting to the database
-    llm_description: The database for connecting to the database
+      en_US: Database connect info
+      zh_Hans: 连接数据库的信息
+      pt_BR: Database connect info
+    llm_description: Database connect info
     form: llm
   - name: operateType
     type: select

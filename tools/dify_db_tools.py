@@ -6,24 +6,37 @@ from dify_plugin import Tool
 from dify_plugin.entities.tool import ToolInvokeMessage
 
 from sql_utils.sql import sql_service
-from sql_utils.utils import format_json_string
+from sql_utils.utils import format_json_string, get_value
 
 
 class DifyDbToolsTool(Tool):
     def _invoke(self, tool_parameters: dict[str, Any]) -> Generator[ToolInvokeMessage]:
-        db_host = tool_parameters.get('db_host')
-        db_user = tool_parameters.get('db_user')
-        db_password = tool_parameters.get('db_password')
-        db_database = tool_parameters.get('db_database')
-        db_port = int(tool_parameters.get('db_port'))
+        db_info = tool_parameters.get('db_info')
+        db_info = json.loads(format_json_string(db_info))
 
         connect_config = {
-            "host": db_host,
-            "user": db_user,
-            "password": db_password,
-            "database": db_database,
-            "port": db_port,
+            "host": get_value(db_info, 'host', None),
+            "user": get_value(db_info, 'user', None),
+            "password": get_value(db_info, 'password', None),
+            "database": get_value(db_info, 'database', None),
+            "port": get_value(db_info, 'port', None),
         }
+
+        if connect_config['host'] is None:
+            yield self.create_json_message({"error": "Database connection failed, missing host parameter"})
+            return
+        if connect_config['user'] is None:
+            yield self.create_json_message({"error": "Database connection failed, missing user parameter"})
+            return
+        if connect_config['password'] is None:
+            yield self.create_json_message({"error": "Database connection failed, missing password parameter"})
+            return
+        if connect_config['database'] is None:
+            yield self.create_json_message({"error": "Database connection failed, missing database parameter"})
+            return
+        if connect_config['port'] is None:
+            yield self.create_json_message({"error": "Database connection failed, missing port parameter"})
+            return
 
         print(connect_config)
 
