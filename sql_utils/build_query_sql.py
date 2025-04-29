@@ -338,7 +338,7 @@ def build_query_sql(query_config, module_config):
     query_config_only_count = get_value(query_config, 'onlyCount', False)
 
     if query_config_only_count:
-        if has_distinct:
+        if not has_distinct:
             sqls.append("select count(0) as total")
         else:
             sqls.append(f"select count( {' '.join(field_sql_list)} ) as total")
