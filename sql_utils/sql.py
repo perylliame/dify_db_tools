@@ -132,10 +132,7 @@ def select_one(connect_config, query_config, module_config):
 
     result = select(connect_config=connect_config, query_config=target_query_config, module_config=module_config)
 
-    if "list" in result:
-        return result['list'][0] if len(result['list']) else None
-    else:
-        return result
+    return {"result": None if "list" not in result or len(result['list']) == 0 else result['list'][0]}
 
 
 def insert(connect_config, query_config, module_config):
