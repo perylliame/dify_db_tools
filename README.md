@@ -7,12 +7,12 @@
 dify_db_tools is a database connection tool. Based on the orchestration engine of the Dify platform, it can quickly implement enhanced functions of adding, deleting, modifying and querying by connecting to databases such as MySQL and MariaDB. Thus, it enables the orchestration of complex business functions within Dify workflow applications. The following first introduces a simple case. As shown
 below, after adding the tool in the orchestration process, configure the tool information:
 
-1. Database connection information: a JSON object that should include "host" (the database host address), "port" (the database listening port), "user" (the username for connecting to the database), "password" (the password for connecting to the database), and "database" (the name of the connected database).
-2. Operation types: query, single query, create, update, delete, batch create, and batch update. There are a total of seven operation types in all.
-3. Operation parameters: a JSON object containing the parameters for performing the operation. For example, if it is a query operation, the operation parameters are the query parameters, including the query page number, the number of data items per page, filtering parameters, sorting parameters, deduplication settings, and whether to query only the total count, etc. A detailed introduction will
+1. Database connect info: a JSON object that should include "host" (the database host address), "port" (the database listening port), "user" (the username for connecting to the database), "password" (the password for connecting to the database), and "database" (the name of the connected database).
+2. Operate Type: query, single query, create, update, delete, batch create, and batch update. There are a total of seven operation types in all.
+3. Operate Data: a JSON object containing the parameters for performing the operation. For example, if it is a query operation, the operation parameters are the query parameters, including the query page number, the number of data items per page, filtering parameters, sorting parameters, deduplication settings, and whether to query only the total count, etc. A detailed introduction will
    follow later.
-4. Module configuration information object: a JSON object used to describe the table structure information. SQL statements for adding, deleting, modifying, and querying will be generated based on this table structure information.
-5. Output SQL debugging information: Set it to "True" when you need to query and return the executed SQL and the execution parameters.
+4. Module Config: a JSON object used to describe the table structure information. SQL statements for adding, deleting, modifying, and querying will be generated based on this table structure information.
+5. Output debugging information: Set it to "True" when you need to query and return the executed SQL and the execution parameters.
 
 For example, if you want to perform an operation to query the data in this table and retrieve the first 3 rows of data:
 
