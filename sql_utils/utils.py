@@ -3,8 +3,7 @@ import re
 
 
 def format_json_string(json_str):
-    json_str = re.sub(r'(\n|\s)', '', json_str)
-    json_str = re.sub(r'\"', '"', json_str)
+    json_str = re.sub(r'\u00A0', '', json_str)
     return json_str
 
 
