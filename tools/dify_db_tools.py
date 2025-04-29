@@ -47,6 +47,7 @@ class DifyDbToolsTool(Tool):
             return
 
         try:
+            operate_data_str = format_json_string(operate_data_str)
             operate_data = json.loads(operate_data_str)
         except json.JSONDecodeError:
             yield self.create_json_message({
