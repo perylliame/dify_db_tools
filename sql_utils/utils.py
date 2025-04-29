@@ -127,9 +127,9 @@ show_sql = True
 def log_sql(sql, values):
     if show_sql:
         print("\n/*---------------------------------------log sql-------------------------------------------*/\n")
-        print("source sql-->>\n\n")
+        print("\nsource sql-->>\n")
         print(sql)
-        print("sql params-->>\n\n")
+        print("\nsql params-->>\n")
         print(values)
         count = 0
 
@@ -145,6 +145,6 @@ def log_sql(sql, values):
 
         import re
         target_sql = re.sub(r'\?+', replace_callback, sql)
-        print("target sql-->>\n\n")
+        print("\ntarget sql-->>\n")
         print(target_sql)
-        print("\n\n")
+        print("\n")
