@@ -65,7 +65,7 @@ def get_id(cursor, len):
     return [val for key, val in result[0].items()]
 
 
-def select(connect_config, query_config, module_config):
+def select(connect_config, query_config, module_config, debug_data=[]):
     conn, cursor, close = get_sql_connection(connect_config)
 
     n_page = get_value(query_config, 'page', 0)
@@ -87,6 +87,7 @@ def select(connect_config, query_config, module_config):
 
     try:
 
+        debug_data.append({"sql": sql, "values": values})
         cursor.execute(sql, values)
         rows = cursor.fetchall()
 
@@ -116,7 +117,7 @@ def select(connect_config, query_config, module_config):
         close()
 
 
-def select_one(connect_config, query_config, module_config):
+def select_one(connect_config, query_config, module_config, debug_data=[]):
     target_query_config = {
         "offset": 0,
         "size": 1,
@@ -130,7 +131,7 @@ def select_one(connect_config, query_config, module_config):
             "operator": "="
         })
 
-    result = select(connect_config=connect_config, query_config=target_query_config, module_config=module_config)
+    result = select(connect_config=connect_config, query_config=target_query_config, module_config=module_config, debug_data=debug_data)
 
     if "error" in result:
         return result
@@ -138,7 +139,7 @@ def select_one(connect_config, query_config, module_config):
     return {"result": None if "list" not in result or len(result['list']) == 0 else result['list'][0]}
 
 
-def insert(connect_config, query_config, module_config):
+def insert(connect_config, query_config, module_config, debug_data=[]):
     conn, cursor, close = get_sql_connection(connect_config)
 
     row = get_value(query_config, 'row', None)
@@ -157,10 +158,12 @@ def insert(connect_config, query_config, module_config):
     try:
         sql, values = build_insert_sql(module_config, row)
 
+        debug_data.append({"sql": sql, "values": values})
         cursor.execute(sql, values)
         conn.commit()
 
         sql, values = build_query_sql({"page": 0, "size": 1, "filters": [{"field": "id", "operator": "=", "value": row_id}]}, module_config)
+        debug_data.append({"sql": sql, "values": values})
         cursor.execute(sql, values)
         rows = cursor.fetchall()
 
@@ -186,7 +189,7 @@ def insert(connect_config, query_config, module_config):
         close()
 
 
-def batch_insert(connect_config, query_config, module_config):
+def batch_insert(connect_config, query_config, module_config, debug_data=[]):
     conn, cursor, close = get_sql_connection(connect_config)
 
     rows = get_value(query_config, 'rows', None)
@@ -207,11 +210,13 @@ def batch_insert(connect_config, query_config, module_config):
     try:
         for row in rows:
             sql, values = build_insert_sql(module_config, row)
+            debug_data.append({"sql": sql, "values": values})
             cursor.execute(sql, values)
 
         conn.commit()
 
         sql, values = build_query_sql({"page": 0, "size": 1, "filters": [{"field": "id", "operator": "in", "value": row_id_list}]}, module_config)
+        debug_data.append({"sql": sql, "values": values})
         cursor.execute(sql, values)
         rows = cursor.fetchall()
 
@@ -237,7 +242,7 @@ def batch_insert(connect_config, query_config, module_config):
         close()
 
 
-def update(connect_config, query_config, module_config):
+def update(connect_config, query_config, module_config, debug_data=[]):
     conn, cursor, close = get_sql_connection(connect_config)
 
     row = get_value(query_config, 'row', None)
@@ -260,10 +265,12 @@ def update(connect_config, query_config, module_config):
     try:
         sql, values = build_update_sql(module_config, row, update_fields)
 
+        debug_data.append({"sql": sql, "values": values})
         cursor.execute(sql, values)
         conn.commit()
 
         sql, values = build_query_sql({"page": 0, "size": 1, "filters": [{"field": "id", "operator": "=", "value": row_id}]}, module_config)
+        debug_data.append({"sql": sql, "values": values})
         cursor.execute(sql, values)
         rows = cursor.fetchall()
 
@@ -289,7 +296,7 @@ def update(connect_config, query_config, module_config):
         close()
 
 
-def batch_update(connect_config, query_config, module_config):
+def batch_update(connect_config, query_config, module_config, debug_data=[]):
     conn, cursor, close = get_sql_connection(connect_config)
 
     rows = get_value(query_config, 'rows', None)
@@ -314,11 +321,13 @@ def batch_update(connect_config, query_config, module_config):
     try:
         for row in rows:
             sql, values = build_update_sql(module_config, row, update_fields)
+            debug_data.append({"sql": sql, "values": values})
             cursor.execute(sql, values)
 
         conn.commit()
 
         sql, values = build_query_sql({"page": 0, "size": 1, "filters": [{"field": "id", "operator": "in", "value": row_id_list}]}, module_config)
+        debug_data.append({"sql": sql, "values": values})
         cursor.execute(sql, values)
         rows = cursor.fetchall()
 
@@ -344,7 +353,7 @@ def batch_update(connect_config, query_config, module_config):
         close()
 
 
-def delete(connect_config, query_config, module_config):
+def delete(connect_config, query_config, module_config, debug_data=[]):
     conn, cursor, close = get_sql_connection(connect_config)
     id = get_value(query_config, 'id', None)
     if id is None:
@@ -354,6 +363,7 @@ def delete(connect_config, query_config, module_config):
 
     try:
         sql, values = build_delete_sql(module_config, id)
+        debug_data.append({"sql": sql, "values": values})
         cursor.execute(sql, values)
         conn.commit()
 

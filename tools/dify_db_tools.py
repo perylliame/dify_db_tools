@@ -82,48 +82,56 @@ class DifyDbToolsTool(Tool):
         })
 
         operate_result = None
+        debug_data = []
 
         if operate_type == 'query':
             operate_result = sql_service['select'](
                 connect_config=connect_config,
                 query_config=operate_data,
                 module_config=module_config,
+                debug_data=debug_data,
             )
         elif operate_type == 'item':
             operate_result = sql_service['select_one'](
                 connect_config=connect_config,
                 query_config=operate_data,
                 module_config=module_config,
+                debug_data=debug_data,
             )
         elif operate_type == 'insert':
             operate_result = sql_service['insert'](
                 connect_config=connect_config,
                 query_config=operate_data,
                 module_config=module_config,
+                debug_data=debug_data,
             )
         elif operate_type == 'update':
             operate_result = sql_service['update'](
                 connect_config=connect_config,
                 query_config=operate_data,
                 module_config=module_config,
+                debug_data=debug_data,
             )
         elif operate_type == 'delete':
             operate_result = sql_service['delete'](
                 connect_config=connect_config,
                 query_config=operate_data,
                 module_config=module_config,
+                debug_data=debug_data,
             )
         elif operate_type == 'batchInsert':
             operate_result = sql_service['batch_insert'](
                 connect_config=connect_config,
                 query_config=operate_data,
                 module_config=module_config,
+                debug_data=debug_data,
             )
         elif operate_type == 'batchUpdate':
             operate_result = sql_service['batch_update'](
                 connect_config=connect_config,
                 query_config=operate_data,
                 module_config=module_config,
+                debug_data=debug_data,
             )
         else:
             operate_result = {"error": f"Can't recognise operate type: {operate_type}"}
