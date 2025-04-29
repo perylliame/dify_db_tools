@@ -31,7 +31,7 @@ You can also use an interface calling tool to execute the workflow and obtain th
 This plugin only requires sensitive data such as database connection information and table structure information during the configuration stage. It will only use these data to connect to the database and perform operations on the database tables, and will not collect any other sensitive data, such as personal information, usernames and passwords, email addresses, etc. Moreover, there will be no
 behavior of uploading any data to any server, and the code is completely open-source and subject to market supervision.
 
-### Table structure information
+### Module Config
 
 The following is a simple JSON description of the structure information of a product table:
 
@@ -141,8 +141,8 @@ The following is a simple JSON description of the structure information of a pro
 + **base**：The identification of the business module to which the table belongs. This field currently has no function in this plugin, but it is advisable not to omit this value.
 + **columns**：Field information is an object. The key of the object is the identification name of the field (which must be in camel case naming). The object value has four attributes: valueType, query, convert, and front.
     - **valueType**：The field type. The optional values are as follows:
-        * **string**：is string；
-        * **number**：is number；
+        * **string**：String；
+        * **number**：Number；
         * **date**：A string in the format of YYYY-MM-DD (in fact, the field type in the MySQL database is datetime, and it will be formatted as YYYY-MM-DD when queried and then returned);
         * **datetime**：A string in the format of YYYY-MM-DD HH:mm:ss (In fact, the field type of the MySQL database is datetime, and it will be formatted as YYYY-MM-DD HH:mm:ss and returned when queried.)
         * **time**：A string in the format of HH:mm:ss (In fact, the field type in the MySQL database is time, and it will be formatted as HH:mm:ss and returned when queried.)
