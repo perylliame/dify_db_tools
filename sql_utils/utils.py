@@ -2,6 +2,12 @@ import json
 import re
 
 
+def format_json_string(json_str):
+    json_str = re.sub(r'(\n|\s)', '', json_str)
+    json_str = re.sub(r'\"', '"', json_str)
+    return json_str
+
+
 def array_json_encoder(val):
     return json.dumps(val)
 

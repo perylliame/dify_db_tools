@@ -6,6 +6,8 @@ from dify_plugin import Tool
 from dify_plugin.entities.tool import ToolInvokeMessage
 
 from sql_utils.sql import sql_service
+from sql_utils.utils import format_json_string
+
 
 class DifyDbToolsTool(Tool):
     def _invoke(self, tool_parameters: dict[str, Any]) -> Generator[ToolInvokeMessage]:
@@ -63,6 +65,7 @@ class DifyDbToolsTool(Tool):
             return
 
         try:
+            module_config_str = format_json_string(module_config_str)
             module_config = json.loads(module_config_str)
         except json.JSONDecodeError:
             yield self.create_json_message({
