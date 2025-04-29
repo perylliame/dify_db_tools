@@ -25,6 +25,19 @@ parameters:
       pt_BR: Database connect info
     llm_description: Database connect info
     form: llm
+  - name: output_debug
+    type: boolean
+    required: false
+    label:
+      en_US: Output debugging information
+      zh_Hans: 输出sql等调试信息
+      pt_BR: Output debugging information
+    human_description:
+      en_US: Output debugging information
+      zh_Hans: 输出sql等调试信息
+      pt_BR: Output debugging information
+    llm_description: Output debugging information
+    form: form
   - name: operateType
     type: select
     required: true

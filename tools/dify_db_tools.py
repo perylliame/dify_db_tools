@@ -11,6 +11,9 @@ from sql_utils.utils import format_json_string, get_value
 
 class DifyDbToolsTool(Tool):
     def _invoke(self, tool_parameters: dict[str, Any]) -> Generator[ToolInvokeMessage]:
+
+        output_debug = tool_parameters.get('output_debug')
+
         db_info = tool_parameters.get('db_info')
         db_info = json.loads(format_json_string(db_info))
 
@@ -150,5 +153,6 @@ class DifyDbToolsTool(Tool):
             operate_result = {"error": f"Can't recognise operate type: {operate_type}"}
 
         print('operate_result=====>>\n\n', operate_result)
-        operate_result['debug_data'] = debug_data
+        if output_debug:
+            operate_result['debug_data'] = debug_data
         yield self.create_json_message(operate_result)
