@@ -124,5 +124,5 @@ class DifyDbToolsTool(Tool):
         else:
             operate_result = {"error": f"Can't recognise operate type: {operate_type}"}
 
-        # print('operate_result=====>>\n\n', operate_result)
+        print('operate_result=====>>\n\n', operate_result)
         yield self.create_json_message(operate_result)
