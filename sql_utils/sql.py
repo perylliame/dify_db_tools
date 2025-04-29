@@ -215,7 +215,7 @@ def batch_insert(connect_config, query_config, module_config, debug_data=[]):
 
         conn.commit()
 
-        sql, values = build_query_sql({"page": 0, "size": 1, "filters": [{"field": "id", "operator": "in", "value": row_id_list}]}, module_config)
+        sql, values = build_query_sql({"all": True, "filters": [{"field": "id", "operator": "in", "value": row_id_list}]}, module_config)
         debug_data.append({"sql": sql, "values": values})
         cursor.execute(sql, values)
         rows = cursor.fetchall()
@@ -326,7 +326,7 @@ def batch_update(connect_config, query_config, module_config, debug_data=[]):
 
         conn.commit()
 
-        sql, values = build_query_sql({"page": 0, "size": 1, "filters": [{"field": "id", "operator": "in", "value": row_id_list}]}, module_config)
+        sql, values = build_query_sql({"all": True, "filters": [{"field": "id", "operator": "in", "value": row_id_list}]}, module_config)
         debug_data.append({"sql": sql, "values": values})
         cursor.execute(sql, values)
         rows = cursor.fetchall()
