@@ -214,7 +214,7 @@ order by t1.created_at desc limit %s,%s
 ['%rose%', '10', '500', 0, 12]
 ```
 
-如代码所示，where条件实际上是由 filterExpression 升成的，注意的是为了避免存在sql注入的问题，filterExpression中除了“and”“or”等关键字之外，其他所有字符都试为filter对象的id，通过正则的方式替换；比如 “(FF_1 and (FF_2 or FF_3)) or 1=1”这样试图绕过筛选条件的句子是不行的，会将1=1视为filter id进行替换，从而导致sql语法异常无法查询；
+如代码所示，where条件实际上是由 filterExpression 生成的，注意的是为了避免存在sql注入的问题，filterExpression中除了“and”“or”等关键字之外，其他所有字符都试为filter对象的id，通过正则的方式替换；比如 “(FF_1 and (FF_2 or FF_3)) or 1=1”这样试图绕过筛选条件的句子是不行的，会将1=1视为filter id进行替换，从而导致sql语法异常无法查询；
 
 ##### 去重查询
 当你需要根据某些字段进行去重查询时，参数如下所示：
