@@ -522,6 +522,8 @@ Batch creation enables transactions. If the insertion of one piece of data fails
 
 When the operation type is "update", the parameter format is the same as that for creation. However, it should be noted that the updated object must contain the value of the "id" field and it cannot be empty.
 
+Different from the "new" operation which only allows setting the `row` parameter, the "update" operation supports setting the `updateFields` parameter in addition to the `row` parameter. The `updateFields` is an array of field identifier strings, indicating which fields are to be updated only. 
+
 The data type of the returned data is the same as that when creating data.
 
 #### Batch Update
