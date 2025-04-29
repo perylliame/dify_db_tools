@@ -3,6 +3,9 @@
 **Type:** tool
 
 ### Description
+
+[备用文档地址](https://gitee.com/peryl/dify_db_tools/blob/master/README_ZH.md)
+
 dify_db_tools 是一个数据库连接工具，以dify平台的编排引擎为基础，通过对接mysql, mariadb等数据库快速实现增强型的增删改查功能，从而实现在dify工作流应用中编排复杂的业务功能；以下先介绍一个简单的案例,如下所示，在编排流程中添加工具之后，配置工具信息：
 
 1. 数据库连接信息：一个json对象，要包含host（数据库主机地址），port（数据库监听端口），user（连接数据库的用户名），password（连接数据库的密码）以及database（连接的数据库名）；

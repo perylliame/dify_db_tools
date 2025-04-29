@@ -4,6 +4,8 @@
 
 ### Description
 
+[Alternative document address](https://gitee.com/peryl/dify_db_tools/blob/master/README.md)
+
 dify_db_tools is a database connection tool. Based on the orchestration engine of the Dify platform, it can quickly implement enhanced functions of adding, deleting, modifying and querying by connecting to databases such as MySQL and MariaDB. Thus, it enables the orchestration of complex business functions within Dify workflow applications. The following first introduces a simple case. As shown
 below, after adding the tool in the orchestration process, configure the tool information:
 
