@@ -150,4 +150,5 @@ class DifyDbToolsTool(Tool):
             operate_result = {"error": f"Can't recognise operate type: {operate_type}"}
 
         print('operate_result=====>>\n\n', operate_result)
+        operate_result['debug_data'] = debug_data
         yield self.create_json_message(operate_result)
