@@ -77,7 +77,7 @@ def format_string2array(val):
 def build_query_sql(query_config, module_config):
     column_info = format_columns(module_config["columns"])
 
-    print("column_info ==>>", column_info)
+    # print("column_info ==>>", column_info)
 
     distinct_fields = get_value(query_config, 'distinctFields', [])
 
