@@ -16,15 +16,15 @@ below, after adding the tool in the orchestration process, configure the tool in
 
 For example, if you want to perform an operation to query the data in this table and retrieve the first 3 rows of data:
 
-![](https://cdn.nlark.com/yuque/0/2025/png/574320/1745908760441-99242bc2-8a42-4138-ae41-68c5d8ae15c3.png)
+![](./images/1.png)
 
 Execution result:
 
-![](https://cdn.nlark.com/yuque/0/2025/png/574320/1745909635419-fc0987a2-e1be-4be7-96ab-5d821848020b.png)
+![](./images/2.png)
 
 You can also use an interface calling tool to execute the workflow and obtain the execution result.
 
-![](https://cdn.nlark.com/yuque/0/2025/png/574320/1745910052012-2420bb27-4e07-4709-a154-f2908dec6167.png)
+![](./images/3.png)
 
 ### Declaration
 
@@ -311,9 +311,9 @@ order by t1.created_at desc limit %s,%s
 
 ```json
 [
-  '%rose%',
-  '10',
-  '500',
+  "%rose%",
+  "10",
+  "500",
   0,
   12
 ]
@@ -379,7 +379,7 @@ When you need to query the total number instead of querying data objects, please
 
 ```json
 {
-  onlyCount: true,
+  "onlyCount": true,
   "filters": [
     {
       "field": "count",
@@ -536,13 +536,13 @@ The deletion operation supports deleting a single piece of data and multiple pie
 
 ```json
 {
-  id: "049916e2-24db-11f0-9e22-5254001d6dcd"
+  "id": "049916e2-24db-11f0-9e22-5254001d6dcd"
 }
 ```
 
 ```json
 {
-  id: [
+  "id": [
     "049ff2d5-24db-11f0-9e22-5254001d6dcd",
     "2cd24b09-24db-11f0-9e22-5254001d6dcd",
     "2cd86bee-24db-11f0-9e22-5254001d6dcd"
@@ -583,11 +583,11 @@ or replace table plain.pl_module
 
 Maintain the data in this table, as shown below:
 
-![](https://cdn.nlark.com/yuque/0/2025/png/574320/1745920974423-9a192700-d590-4183-bf58-d9f34309de6a.png)
+![](./images/4.png)
 
 Click the "Edit Configuration" button to edit the table structure information of this table.
 
-![](https://cdn.nlark.com/yuque/0/2025/png/574320/1745921007508-e7964e42-ae16-4804-853f-098cc77232a0.png)
+![](./images/5.png)
 
 Next, I'll explain how to implement the workflow orchestration. The simple principle is that the starting node of the workflow accepts three parameters: operateType, operateData, and module.
 
@@ -597,19 +597,19 @@ Next, I'll explain how to implement the workflow orchestration. The simple princ
 
 The orchestration is as follows:
 
-![](https://cdn.nlark.com/yuque/0/2025/png/574320/1745919794354-8b302df1-a73b-4829-9390-46e9eca4b809.png)
+![](./images/6.png)
 
 First, for the starting node, define three parameters. Among them, "operateType" is a single - select dropdown option, and the other two are strings.
 
-![](https://cdn.nlark.com/yuque/0/2025/png/574320/1745919856509-0fe24ced-bcff-4aa4-8880-eaed9c6a345a.png)
+![](./images/7.png)
 
 Then, enter the first dify_db_tools plugin. The operation type of this plugin is "query a single record". Based on the "module" provided by the starting node, query the table structure information of the table (module) to be operated on.
 
-![](https://cdn.nlark.com/yuque/0/2025/png/574320/1745919939507-d1d2df9e-63a1-4c7d-9c9f-2ac66e496d0b.png)
+![](./images/8.png)
 
 Next, proceed to the "Code Execution" node, which is the "Query Module Information" in the diagram. The purpose of this code execution is to determine whether the target table structure information has been retrieved, extract `moduleConfig` and `error`, and return a flag to indicate whether the query was successful.  
 
-![](https://cdn.nlark.com/yuque/0/2025/png/574320/1745920064751-c79cb988-bef5-493a-94ef-b7998cc68f2a.png)
+![](./images/9.png)
 
 Then, enter the conditional branch node. If the flag obtained from the previous parsing is "N", directly end the process and return the error message.
 
@@ -619,7 +619,7 @@ The operation type of this dify_db_tools node takes the `operateType` parameter 
 
 The configuration information of the table module is obtained from the `moduleConfig` that was just queried.
 
-![](https://cdn.nlark.com/yuque/0/2025/png/574320/1745920203205-6c64a845-0ee7-45c3-b363-49cff5f7dc32.png)
+![](./images/10.png)
 
 Then, enter the code executor "Get the object returned by the database operation". The function of the code is to convert the returned `debugData` into a string and return it. Due to the limitations of the Dify platform, the returned data cannot contain multi - dimensional arrays, that is, the elements of an array cannot be arrays, which will lead to an exception here. Because when performing batch creation or batch editing, the `debug_data` output here is as follows, which is a two - dimensional array:
 
@@ -647,17 +647,17 @@ This will cause an exception in the Dify orchestration. The only solution is to 
 
 Then it can be put into use. After publishing the update, click "Run" to open the execution interface of the workflow. For example, when querying data from the `llm_user` table without passing in pagination parameters, it will default to querying the first page with 5 records per page.
 
-![](https://cdn.nlark.com/yuque/0/2025/png/574320/1745920651181-55837f03-a422-426e-90ab-c2034abb63b0.png)
+![](./images/11.png)
 
 Execute it in the API debugging tool:
 
-![](https://cdn.nlark.com/yuque/0/2025/png/574320/1745920791267-68abe586-f305-4c5c-b5b2-6d60b62305f8.png)
+![](./images/12.png)
 
 Insert a piece of data:
 
-![](https://cdn.nlark.com/yuque/0/2025/png/574320/1745921392054-e687f7b9-447f-4d9e-b123-99f3a9ef28eb.png)
+![](./images/13.png)
 
 Call in the debugging tool:
 
-![](https://cdn.nlark.com/yuque/0/2025/png/574320/1745921622422-d7b84f1d-4ec0-434a-9125-c4e38d87fe18.png)
+![](./images/14.png)
 
